@@ -29,6 +29,14 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
+		<script src="demo/lib/paymentrequest.js"></script>
+		<script>
+		var __walletUrl = "demo/lib/wallet.html";
+		</script>
+		<style>
+		body iframe { z-index:10; }
+		</style>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -50,10 +58,323 @@
 				</section>
 
 				<section>
-					<h3>More slides here</h3>
-					<img data-src="images/image.jpg" class="stretch">
+					<img data-src="images/smashing-la.jpg" class="stretch">
+					<h3>SmashingConf Los Angeles</h3>
 				</section>
 
+				<section>
+					<img data-src="images/smashing-whistler.jpg" class="stretch">
+					<h3>SmashingConf Whistler</h3>
+				</section>
+
+				<section>
+					<img data-src="images/oxford.jpg" class="stretch">
+					<h3>SmashingConf Oxford</h3>
+				</section>
+
+				<section>
+					<img data-src="images/fish-and-chips.jpg" class="stretch">
+					<h3>Fish &amp; Chips</h3>
+				</section>
+
+				<!--section>
+					<img data-src="images/internet-explorer.png" class="stretch">
+					<h3>"Didn't you already make the web pay?"</h3>
+				</section>
+
+				<section>
+					<img data-src="images/scam.png" class="stretch">
+					<h3>Get rich quick!</h3>
+				</section-->
+
+				<section>
+					<img data-src="images/shopping.jpg" class="stretch">
+					<h3>Although actually I want to talk about shopping in general.</h3>
+					<div style="position:absolute;left:15px;bottom:15px;z-index:1000;font-size: 0.35em;">
+					Photo credit: <a href="https://www.flickr.com/photos/rodeime/15627238721/">Roderick Eime</a> CC BY 2.0
+					</div>
+				</section>
+
+				<section>
+					<img data-src="images/online-shopping.jpg" class="stretch">
+					<h3>And in particular online shopping.</h3>
+					<div style="position:absolute;left:15px;bottom:15px;z-index:1000;font-size: 0.35em;">
+					Photo credit: <a href="https://www.flickr.com/photos/robbertjnoordzij/22257890101/">Robbert Noordzij</a> CC BY 2.0
+					</div>
+				</section>
+
+				<section>
+					<h2>e-Commerce is booming!</h2>
+				</section>
+
+				<section>
+					<img data-src="images/us-growth.png" class="stretch">
+					<h3>In 2014, U.S. retail digital commerce<br>grew to $268.5 billion.</h3>
+					<div style="position:absolute;left:15px;bottom:15px;z-index:1000;font-size: 0.35em;">
+					Source: comScore Digital Future in Focus 2015
+					</div>
+				</section>
+
+				<section>
+					<h3>In 2015, U.K. e-commerce revenue was $99 billion, the strongest in Europe and the third strongest in the world.</h3>
+					<div style="position:absolute;left:15px;bottom:15px;z-index:1000;font-size: 0.35em;">
+					Source: PFSweb 2015 eCommerce Summary
+					</div>
+				</section>
+
+				<section>
+					<h4>Amazon now has this site: <a href="https://www.amazon.com/gp/b2b/reports">https://www.amazon.com/gp/b2b/reports</a></h4>
+					<img data-src="images/amazon.png" class="stretch">
+				</section>
+
+				<section>
+					<img data-src="images/spending-chart.png" class="stretch">
+					<h3>My 2015 Amazon spending</h3>
+				</section>
+
+				<section>
+					<img data-src="images/time-vs-dollars.png" class="stretch">
+					<div style="position:absolute;left:15px;bottom:15px;z-index:1000;font-size: 0.35em;">
+					Source: comScore Digital Future in Focus 2015 - U.S. Retail Digital Commerce - Q4 2014
+					</div>
+				</section>
+
+				<!--section>
+					<h3>In the U.K. about 28% of e-commerce dollars were mobile (2015). Strong but still not great.</h3>
+				</section-->
+
+				<section>
+					<h3><em>"As friction gets removed from the mobile purchase process, gains in sales can be expected to accelerate."</em></h3>
+				</section>
+
+				<section>
+					<img data-src="images/w3c-web-payments.png" class="stretch">
+					<h4><a href="https://www.w3.org/Payments/WG/">https://www.w3.org/Payments/WG/</a></h4>
+				</section>
+
+				<section>
+					<img data-src="images/paymentrequest-api.png" class="stretch">
+					<h4><a href="http://go4a.de/paymentrequest-api">http://go4a.de/paymentrequest-api</a></h4>
+				</section>
+
+				<section>
+					<h3>Show me the <del>money</del> code!</h3>
+				</section>
+
+				<section>
+					<h3>Simple payment request code sample</h3>
+					<pre><code>
+	var request = new PaymentRequest(
+	  ['visa','mc','amex'],
+	  {
+	    items: [
+	      {
+	        id: "total", label: "Fish and Chips",
+	        amount: { currencyCode: "GBP", value: "12.50" }, // £12.50
+	      }
+	    ]
+	  }
+	);
+	var promise = request.show();
+					</code></pre>
+<script>
+	function simpleDemo() {
+	var request = new PaymentRequest(
+	  ['visa','mc','amex'],
+	  {
+	    items: [
+	      {
+	        id: "total", label: "Fish and Chips",
+	        amount: { currencyCode: "GBP", value: "12.50" }, // £12.50
+	      }
+	    ]
+	  }
+	);
+	request.show().then(function(response) {
+		response.complete(true);
+	});
+}
+</script>					
+				  <button onclick="simpleDemo()">Demo</button>
+				</section>
+
+				<section>
+					<h3>User experience is implementation dependent</h3>
+					<img data-src="images/simple-request.png" class="stretch">
+				</section>
+
+
+				<section>
+					<img data-src="images/credit-cards.jpg" class="stretch">
+					<h4>Approximately 75% of online sales are paid for<br>by debit and credit cards.</h4>
+					<div style="position:absolute;left:15px;bottom:15px;z-index:1000;font-size: 0.35em;">
+					Photo credit: <a href="https://www.flickr.com/photos/smemon/12696032183/">Sean MacEntee</a> CC BY 2.0;
+					Data Source: PFSweb 2015 eCommerce Summary
+					</div>
+				</section>
+
+				<section>
+					<img data-src="images/wallet.jpg" class="stretch">
+					<h4>Online wallets such as PayPal are also popular and<br>account for just over 20% of purchases.</h4>
+					<div style="position:absolute;left:15px;bottom:15px;z-index:1000;font-size: 0.35em;">
+					Photo credit: <a href="https://www.flickr.com/photos/68751915@N05/6722573569/">401kcalculator.org</a> CC BY 2.0;
+					Data Source: PFSweb 2015 eCommerce Summary
+					</div>
+				</section>
+
+				<section>
+					<h3>Supported payment methods</h3>
+					<img data-src="images/we-accept.jpg" class="stretch">
+					<h4><code>['visa','mc','amex']</code></h4>
+					<h4><code>['visa','mc','amex','paypal.com', ...]</code></h4>
+				</section>
+
+				<section>
+					<h3>Processing the response</h3>
+					<pre><code>
+	request.show()
+	  .then(function(response) {
+	    // process transaction response here
+	    // response.methodName == selected payment method
+	    // response.details == payment details e.g. card number
+	    return response.complete(true);
+	  })
+	  .then(function() {
+	    // redirect to confirmation page
+	  })
+	  .catch(function(e) {
+	    //uh oh! something went wrong
+	  });					
+  				  </code></pre>
+				</section>
+
+				<section>
+					<h3>Please mail me my fish and chips</h3>
+					<pre><code>
+var request = new PaymentRequest(
+  ['visa','mc','amex'],
+  {
+    items: [
+      {
+        id: "shipping", label: "FREE shipping",
+        amount: { currencyCode: "GBP", value: "0.00"}
+      },
+      {
+        id: "total", label: "Fish and Chips - TOTAL",
+        amount: { currencyCode: "GBP", value: "12.50" }, // £12.50
+      }
+    ],
+    shippingOptions: [
+    { id: "free", label: "FREE shipping", amount: { currencyCode: "GBP", value: "0.00" } }
+    ]
+  },
+  { requestShipping: true }
+);
+var promise = request.show();
+					</code></pre>
+<script>
+function freeShippingDemo() {
+    var request = new PaymentRequest(
+      ['visa','mc','amex'],
+      {
+        items: [
+          {
+            id: "shipping", label: "FREE shipping",
+            amount: { currencyCode: "GBP", value: "0.00"}
+          },
+          {
+	        id: "total", label: "Fish and Chips - TOTAL",
+	        amount: { currencyCode: "GBP", value: "12.50" }, // £12.50
+          }
+        ],
+        shippingOptions: [
+          { id: "free", label: "FREE shipping", amount: { currencyCode: "GBP", value: "0.00" } }
+        ]
+      },
+      { requestShipping: true }
+    );
+	request.show().then(function(response) {
+		response.complete(true);
+	});
+}
+function calcShippingDemo() {
+    var request = new PaymentRequest(
+      ['visa','mc','amex'],
+      {
+        items: [
+          {
+            id: "basket", label: "Fish and chips",
+            amount: { currencyCode: "GBP", value: "12.50" },
+          },
+          {
+            id: "tax", label: "Sales Tax",
+            amount: { currencyCode: "GBP", value: "5.00" },
+          },
+          {
+            id: "total", label: "Total excluding shipping",
+            amount: { currencyCode: "GBP", value: "17.50" },
+          }
+        ]
+      },
+      { requestShipping:true }
+    );
+    request.onshippingaddresschange = function(e) {
+      // here request.shippingaddress is the address
+      e.updateWith(calculateShippingCost(request));
+    };
+    request.onshippingoptionchange = function(e) {
+      // here request.shippingOption is the id of the option
+      var express = request.shippingOption=="express";
+      e.updateWith(new Promise(function(resolve,reject) {
+        resolve({
+          items: [
+            {
+            id: "basket", label: "Fish and chips",
+            amount: { currencyCode: "GBP", value: "12.50" },
+            },
+            {
+              id: "tax", label: "Sales Tax",
+              amount: { currencyCode: "GBP", value: "5.00" } // US$5.00
+            },
+            {
+              id: "shipping", label: "Shipping - " + express ? "Express (2 day)" : "Ground (5-7 day)",
+              amount: { currencyCode: "GBP", value: express ? "25.00" : "8.00" }
+            },
+            {
+              id: "total", label: "Total due",
+              amount: { currencyCode: "GBP", value: express ? "42.50" : "25.50" }
+            }
+          ]
+        });
+      }));
+    };
+	request.show().then(function(response) {
+		response.complete(true);
+	});
+}
+
+  function calculateShippingCost(r) {
+    return new Promise(function(resolve,reject) {
+          resolve({
+            shippingOptions: [
+              { id: "express", label: "Express 2-day shipping", amount: { currencyCode: "GBP", value: "25.00" } },
+              { id: "ground", label: "Ground 5-7 day shipping", amount: { currencyCode: "GBP", value: "8.00" } }
+            ]
+          });
+      });
+  }
+</script>					
+				  <button onclick="freeShippingDemo()">Demo</button> <button onclick="calcShippingDemo()">Demo</button>
+				</section>
+
+				<section>
+					<h3>We desperately need your feedback!</h3>
+				</section>
+
+				<section>
+					<img data-src="images/fish-and-chips.jpg" class="stretch">
+					<h3>In the meantime, I need some fish &amp; chips.</h3>
+				</section>
 
 				<section>
 					<h2>Thank you!</h2>
@@ -82,7 +403,8 @@
 				keyboard: true,
 				loop: false,
 
-				transition: 'none', // none/fade/slide/convex/concave/zoom
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+				transitionSpeed: 'slow',
 
 				// Optional reveal.js plugins
 				dependencies: [
